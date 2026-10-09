@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111019">
+<title>NikkLive Bullshit Bingo</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f4f0ff;background:#0d0b15;--purple:#aa64ff;--green:#85efb3;--line:#373044;--surface:#1b1727}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#43245a 0%,#16101e 36%,#0d0b15 80%);}
+main{max-width:1050px;margin:auto;padding:36px 18px 70px}header{text-align:center;margin-bottom:24px}.eyebrow{display:inline-block;border:1px solid #614e78;border-radius:99px;padding:7px 14px;color:#d6baff;font-size:.72rem;letter-spacing:.19em;font-weight:900}.topline{margin-top:16px;font-size:clamp(2.2rem,6vw,4.2rem);font-weight:1000;line-height:1;letter-spacing:-.07em;text-transform:uppercase;text-shadow:0 6px 25px #0008}.topline span{color:#b477ff}h1{margin:10px 0 7px;font-size:clamp(1.1rem,2.4vw,1.5rem);letter-spacing:.28em;color:#a99ab8}.subtitle{margin:0;color:#b7a9c7;font-size:.89rem}.layout{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:19px;align-items:start}.panel{border:1px solid #4b3a60;background:#191322cc;border-radius:22px;padding:16px;box-shadow:0 16px 50px #0006}.bingo{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;}
+.square{appearance:none;position:relative;min-width:0;aspect-ratio:1 / 1;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;overflow-wrap:anywhere;padding:8px;border:1px solid #554562;border-radius:12px;background:linear-gradient(155deg,#322341,#1d1727);color:#f7f2ff;font-size:clamp(.62rem,1.35vw,.93rem);font-weight:750;line-height:1.23;cursor:pointer;transition:transform .12s,background .15s,border .15s;user-select:none}
+.square:hover{transform:translateY(-2px);border-color:#ac7aff}.square:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}.square.marked{background:linear-gradient(145deg,#3f2970,#713bd8);border-color:#bd8aff;box-shadow:inset 0 0 20px #b476ff25}.square.marked:after{content:"✓";position:absolute;right:5px;top:1px;color:#d8fce5;font-size:1rem;opacity:.8}.square.free{background:linear-gradient(145deg,#ad2a60,#6e265d);border-color:#ff91b4;color:white;font-weight:1000}.square.win{background:linear-gradient(135deg,#175c47,#2da578);border-color:#b9ffd8;box-shadow:0 0 20px #70ffc53b;animation:pulse 1.2s ease-in-out infinite alternate}.square.win.free{background:linear-gradient(135deg,#175c47,#2da578)}@keyframes pulse{to{box-shadow:0 0 30px #70ffc570}}
+.controls{display:flex;flex-direction:column;gap:10px}.controls button,.dialog-actions button{appearance:none;border:1px solid #5f4b76;background:#2b213a;color:white;padding:12px 13px;border-radius:10px;cursor:pointer;font-weight:750;text-align:left;font-size:.86rem}.controls button:hover,.dialog-actions button:hover{background:#3e2c56}.controls button.primary{background:#6c37ac;border-color:#965acf}.controls button.primary:hover{background:#8448c9}.state{background:#201a2a;border:1px solid #4f3c60;border-radius:13px;padding:17px 13px;text-align:center}.state strong{font-size:2.6rem;letter-spacing:-.08em;color:#b88cff}.state .small{font-size:.75rem;color:#aa9bba}.state.bingo-state{background:#173f32;border-color:#6ee7ad}.state.bingo-state strong{color:#88f7bd}.help{margin-top:9px;padding:12px 2px;color:#b0a2bc;font-size:.78rem;line-height:1.5}.help b{color:#e2c9ff}.footer{text-align:center;color:#8e809f;margin-top:24px;font-size:.76rem}#message{margin:8px 0;color:#ffb0b0;font-size:.82rem;min-height:1em}
+dialog{max-width:min(620px,95vw);width:100%;background:#191323;color:white;border:1px solid #8161a6;border-radius:20px;box-shadow:0 30px 90px #000d;padding:22px}dialog::backdrop{background:#08040dcc;backdrop-filter:blur(5px)}dialog h2{margin-top:0}dialog p{color:#b7a7c7;font-size:.86rem;line-height:1.5}textarea{width:100%;min-height:300px;background:#0f0c17;border:1px solid #5e4c73;border-radius:10px;color:#fff;padding:13px;font-family:inherit;line-height:1.5;resize:vertical} .dialog-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px} .dialog-actions button{flex:1;text-align:center}.dialog-actions button.primary{background:#6c37ac}
+@media(max-width:730px){main{padding:22px 7px 40px}.layout{grid-template-columns:1fr}.panel{padding:8px;border-radius:15px}.bingo{gap:4px}.square{padding:3px;border-radius:8px;font-size:clamp(.50rem,2.3vw,.75rem)}.controls{display:grid;grid-template-columns:repeat(2,1fr)}.state{grid-column:1/-1}.help{grid-column:1/-1}.topline{letter-spacing:-.04em}.controls button{padding:11px;font-size:.8rem}}
+@media print{*{print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}body{background:white;color:black}main{padding:0;max-width:100%}.topline{color:black;text-shadow:none}.topline span{color:#6f37a3}.eyebrow,.subtitle,.controls,.footer{display:none}h1{color:#6f37a3}.layout{display:block}.panel{border:0;box-shadow:none;background:none;padding:0}.bingo{gap:6px}.square{border:2px solid #444;background:#eee;color:#111;min-height:100px;font-size:11pt}.square.marked{background:#cbb4ef;color:#111}.square.free{background:#f9acc9;color:#111}.square.win{background:#94dcc4;color:#111;animation:none}header{margin-bottom:18px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow">LIVE • CHAT • RANKED • CHAOS</div>
+<div class="topline">NIKK<span>LIVE</span></div>
+<h1>BULLSHIT BINGO</h1>
+<p class="subtitle">Sechs Klassiker: Unhitbar, Lag, Cheater, Randoms, No-Reg und AimAssist.</p>
+</header>
+<div class="layout">
+<section class="panel" aria-label="Bingokarte"><div class="bingo" id="board"></div></section>
+<aside class="controls">
+<div class="state" id="state" role="status" aria-live="polite"><strong id="statusNumber">0 / 5</strong><div class="small" id="statusText">Felder einer Reihe markieren</div></div>
+<button class="primary" id="shuffle">🔀 Neues Bingo mischen</button>
+<button id="reset">↺ Markierungen löschen</button>
+<button id="edit">✏️ Felder bearbeiten</button>
+<button id="print">🖨️ Drucken / PDF</button>
+<div class="help"><b>Spielregeln:</b> Feld anklicken, wenn es im Stream passiert. Fünf Felder in einer horizontalen, vertikalen oder diagonalen Reihe ergeben BINGO. Das mittlere Feld ist immer frei. Die sechs Nikk-Zitate sind bei jeder neuen Karte dabei, sofern sie nicht im Editor entfernt werden.<br><br><b>Hinweis:</b> Die Sprüche sind satirische Vorschläge, keine verifizierten Aussagen von NikkLive. Bearbeitungen und die aktuelle Karte werden nur lokal in diesem Browser gespeichert.</div>
+</aside>
+</div>
+<p class="footer">Community-Fanprojekt, Version 2. Kein offizielles NikkLive-Angebot.</p>
+</main>
+<dialog id="editor"><h2>Eigene Bullshit-Felder ✏️</h2><p>Eine Idee pro Zeile. Mindestens 24 verschiedene Einträge. Das mittlere Freifeld wird automatisch ergänzt. Speichern mischt die neue Auswahl direkt.</p><textarea id="pool" spellcheck="false" aria-label="Bingofelder, eines pro Zeile"></textarea><div id="message" role="alert"></div><div class="dialog-actions"><button id="defaults">Standard wiederherstellen</button><button id="cancel">Abbrechen</button><button class="primary" id="save">Speichern und mischen</button></div></dialog>
+<script>
+(() => {
+  'use strict';
+  const FREE = 'NIKK MOMENT 🎯';
+  const SIGNATURE_QUOTES = ['„Unhitbar“','„Lag“','„Cheater“','„Randoms“','„No-Reg“','„AimAssist“'];
+  const DEFAULT_BOARD = [
+    '„Unhitbar“','„Lag“','„Nur noch eine Runde“','„AimAssist“','„Ich war hinter der Wand!“',
+    '„Randoms“','„Das ist so Apex!“','Legend ist plötzlich OP','„Wir spielen safe!“','Matchmaking ist schuld',
+    '„No-Reg“','Die Meta wird erklärt',FREE,'Der Ban-Counter wird erwähnt','EA bekommt einen Seitenhieb',
+    '„Was macht der da?!“','Chat schreibt „Skill Issue“','„Wir brauchen KP!“','Ranked-Punkte schmelzen','„Ich push das jetzt“',
+    '„Das muss man clippen!“','Loadout wird geändert','Ein Gegner ist „1 HP“','„Cheater“','„Letztes Game, wirklich“'
+  ];
+  const EXTRAS = [
+    'EA Creator Hub wird erwähnt','Chat fragt nach dem Rank','„Das ist komplett broken!“',
+    '„Der ist ONE!“','„Wo war mein Audio?!“','„Das war ein No-Reg!“',
+    'Random wird kritisiert','Chat diskutiert Aim Assist','Teammate ist weg',
+    '„Wir brauchen Rotation!“','Rotation kommt zu spät','Chat fragt nach Settings',
+    'Teammate rettet die Runde','„Ich hab keine Heals!“','„Wo ist mein Team?!“',
+    '„Chat, hört mal zu!“','„Das ist doch ein Bug!“','„Was ein Matchmaking“',
+    '„Das war so nicht geplant“','Der Push geht spektakulär schief',
+    'Legenden-Balance wird zerlegt','„Ich bin doch hinter Cover!“',
+    'Das Wort „Hater“ fällt','Jemand erwähnt den Ban-Counter',
+    'Meta-Talk dauert länger als die Runde','„Noch ein Win, dann Schluss“',
+    '„Der hat keinen Sound gemacht“','Hotdrop endet nach 40 Sekunden',
+    '„Ich schwöre, Leute!“','Ein guter Mate wird gelobt',
+    'Die nächste Runde wird zum „Reset“','Es wird nach einem Clip gefragt',
+    '„Das ist jetzt aber unlucky“','„Der steht einfach da!“',
+    'Chat triggert eine Grundsatzdebatte','Eine Challenge wird diskutiert',
+    'Chat und Streamer sind uneins','„Die sind alle auf mir!“',
+    'Nächster Fight statt Rückzug','„Das ist keine Ausrede!“',
+    'Eine Legende ist „unspielbar“','Der Streamtitel wird zum Meme'
+  ];
+  const DEFAULT_POOL = DEFAULT_BOARD.filter(x => x!==FREE).concat(EXTRAS);
+  const KEY = 'nikklive-bingo-v1';
+  const $ = id => document.getElementById(id);
+  const lines = [];
+  for(let r=0;r<5;r++) lines.push([0,1,2,3,4].map(c=>r*5+c));
+  for(let c=0;c<5;c++) lines.push([0,1,2,3,4].map(r=>r*5+c));
+  lines.push([0,6,12,18,24],[4,8,12,16,20]);
+  let pool = DEFAULT_POOL.slice();
+  let board = DEFAULT_BOARD.slice();
+  let marked = new Set([12]);
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify({v:2,pool,board,marked:[...marked]}))}catch(e){}}
+  function restore(){try{
+    const item=JSON.parse(localStorage.getItem(KEY));
+    if(!item || !Array.isArray(item.pool) || !Array.isArray(item.board) || item.pool.length<24 || item.board.length!==25) return;
+    pool=item.pool.map(String);board=item.board.map(String);board[12]=FREE;
+    marked=new Set((Array.isArray(item.marked)?item.marked:[]).filter(n=>Number.isInteger(n)&&n>=0&&n<25));marked.add(12);
+    // Bestehende lokal gespeicherte Karten erhalten ihre Markierungen.
+    // Beim Versionswechsel ergänzen wir die sechs Zitate einmalig.
+    if(item.v!==2){
+      pool=[...new Set([...pool,...SIGNATURE_QUOTES])];
+      if(marked.size===1) board=DEFAULT_BOARD.slice();
+      persist();
+    }
+  }catch(e){}}
+  function winningLines(){return lines.filter(line=>line.every(i=>marked.has(i)))}
+  function render(){
+    const wins=winningLines();const winCells=new Set(wins.flat());
+    const holder=$('board');holder.replaceChildren();
+    board.forEach((name,i)=>{
+      const btn=document.createElement('button');btn.type='button';btn.className='square'+(marked.has(i)?' marked':'')+(i===12?' free':'')+(winCells.has(i)?' win':'');btn.textContent=name;
+      btn.setAttribute('aria-pressed',marked.has(i)?'true':'false');btn.setAttribute('aria-label',name+(marked.has(i)?', markiert':', nicht markiert'));
+      if(i===12){btn.title='Freifeld';btn.disabled=true}
+      else btn.addEventListener('click',()=>{marked.has(i)?marked.delete(i):marked.add(i);persist();render()});
+      holder.appendChild(btn);
+    });
+    const longest=Math.max(...lines.map(line=>line.filter(i=>marked.has(i)).length));
+    $('statusNumber').textContent=wins.length?`BINGO × ${wins.length}`:`${longest} / 5`;
+    $('statusText').textContent=wins.length?'Volltreffer! Der Chat hat gewonnen.':'Beste Reihe, inklusive Freifeld';
+    $('state').classList.toggle('bingo-state',wins.length>0);
+  }
+  function shuffle(arr){
+    for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
+    return arr;
+  }
+  function mix(){
+    // Signature-Zitate bleiben enthalten, sofern sie nicht im Editor entfernt wurden.
+    const signature=SIGNATURE_QUOTES.filter(quote=>pool.includes(quote));
+    const others=shuffle(pool.filter(quote=>!signature.includes(quote)));
+    board=shuffle(signature.concat(others.slice(0,24-signature.length)));
+    board.splice(12,0,FREE);marked=new Set([12]);persist();render();
+  }
+  $('shuffle').addEventListener('click',mix);
+  $('reset').addEventListener('click',()=>{marked=new Set([12]);persist();render()});
+  $('print').addEventListener('click',()=>window.print());
+  $('edit').addEventListener('click',()=>{$('pool').value=pool.join('\n');$('message').textContent='';$('editor').showModal()});
+  $('cancel').addEventListener('click',()=>$('editor').close());
+  $('defaults').addEventListener('click',()=>{$('pool').value=DEFAULT_POOL.join('\n');$('message').textContent='Standardliste geladen. Zum Übernehmen auf Speichern klicken.'});
+  $('save').addEventListener('click',()=>{
+    const items=[...new Set($('pool').value.split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&x!==FREE))];
+    if(items.length<24){$('message').textContent='Es fehlen noch '+(24-items.length)+' unterschiedliche Felder.';return}
+    pool=items;mix();$('editor').close();
+  });
+  restore();render();
+})();
+</script>
+</body>
+</html>
