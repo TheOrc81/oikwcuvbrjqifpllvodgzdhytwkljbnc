@@ -23,7 +23,7 @@ dialog{max-width:min(620px,95vw);width:100%;background:#191323;color:white;borde
 <div class="eyebrow">LIVE • CHAT • RANKED • CHAOS</div>
 <div class="topline">NIKK<span>LIVE</span></div>
 <h1>BULLSHIT BINGO</h1>
-<p class="subtitle">Sechs Klassiker: Unhitbar, Lag, Cheater, Randoms, No-Reg und AimAssist.</p>
+<p class="subtitle">13 NikkLive-Klassiker auf jeder Karte. Restliches Chaos zufällig.</p>
 </header>
 <div class="layout">
 <section class="panel" aria-label="Bingokarte"><div class="bingo" id="board"></div></section>
@@ -33,42 +33,42 @@ dialog{max-width:min(620px,95vw);width:100%;background:#191323;color:white;borde
 <button id="reset">↺ Markierungen löschen</button>
 <button id="edit">✏️ Felder bearbeiten</button>
 <button id="print">🖨️ Drucken / PDF</button>
-<div class="help"><b>Spielregeln:</b> Feld anklicken, wenn es im Stream passiert. Fünf Felder in einer horizontalen, vertikalen oder diagonalen Reihe ergeben BINGO. Das mittlere Feld ist immer frei. Die sechs Nikk-Zitate sind bei jeder neuen Karte dabei, sofern sie nicht im Editor entfernt werden.<br><br><b>Hinweis:</b> Die Sprüche sind satirische Vorschläge, keine verifizierten Aussagen von NikkLive. Bearbeitungen und die aktuelle Karte werden nur lokal in diesem Browser gespeichert.</div>
+<div class="help"><b>Spielregeln:</b> Feld anklicken, wenn es im Stream passiert. Fünf Felder in einer horizontalen, vertikalen oder diagonalen Reihe ergeben BINGO. Das mittlere Feld ist immer frei. Die 13 NikkLive-Klassiker sind bei jeder neuen Karte dabei, sofern sie nicht im Editor entfernt werden.<br><br><b>Hinweis:</b> Die Sprüche sind satirische Vorschläge, keine verifizierten Aussagen von NikkLive. Bearbeitungen und die aktuelle Karte werden nur lokal in diesem Browser gespeichert.</div>
 </aside>
 </div>
-<p class="footer">Community-Fanprojekt, Version 2. Kein offizielles NikkLive-Angebot.</p>
+<p class="footer">Community-Fanprojekt, Version 3. Kein offizielles NikkLive-Angebot.</p>
 </main>
 <dialog id="editor"><h2>Eigene Bullshit-Felder ✏️</h2><p>Eine Idee pro Zeile. Mindestens 24 verschiedene Einträge. Das mittlere Freifeld wird automatisch ergänzt. Speichern mischt die neue Auswahl direkt.</p><textarea id="pool" spellcheck="false" aria-label="Bingofelder, eines pro Zeile"></textarea><div id="message" role="alert"></div><div class="dialog-actions"><button id="defaults">Standard wiederherstellen</button><button id="cancel">Abbrechen</button><button class="primary" id="save">Speichern und mischen</button></div></dialog>
 <script>
 (() => {
   'use strict';
   const FREE = 'NIKK MOMENT 🎯';
-  const SIGNATURE_QUOTES = ['„Unhitbar“','„Lag“','„Cheater“','„Randoms“','„No-Reg“','„AimAssist“'];
+  const SIGNATURE_QUOTES = ['„Unhitbar“','„Lag“','„Cheater“','„Randoms“','„No-Reg“','„AimAssist“', 'Schon wieder bin ich sofort Down', 'Keine Kommunikation', 'Chat zu Ruhig', '„Asia Mann“', 'Aggresives Angriffsportal', 'Controller Hass', 'Dieses Drecksgame'];
   const DEFAULT_BOARD = [
     '„Unhitbar“','„Lag“','„Nur noch eine Runde“','„AimAssist“','„Ich war hinter der Wand!“',
-    '„Randoms“','„Das ist so Apex!“','Legend ist plötzlich OP','„Wir spielen safe!“','Matchmaking ist schuld',
-    '„No-Reg“','Die Meta wird erklärt',FREE,'Der Ban-Counter wird erwähnt','EA bekommt einen Seitenhieb',
-    '„Was macht der da?!“','Chat schreibt „Skill Issue“','„Wir brauchen KP!“','Ranked-Punkte schmelzen','„Ich push das jetzt“',
+    '„Randoms“','„Das ist so Apex!“','Aggresives Angriffsportal','Schon wieder bin ich sofort Down','Matchmaking ist schuld',
+    '„No-Reg“','Die Meta wird erklärt',FREE,'Keine Kommunikation','Dieses Drecksgame',
+    '„Was macht der da?!“','Chat zu Ruhig','Controller Hass','Ranked-Punkte schmelzen','„Asia Mann“',
     '„Das muss man clippen!“','Loadout wird geändert','Ein Gegner ist „1 HP“','„Cheater“','„Letztes Game, wirklich“'
   ];
   const EXTRAS = [
     'EA Creator Hub wird erwähnt','Chat fragt nach dem Rank','„Das ist komplett broken!“',
     '„Der ist ONE!“','„Wo war mein Audio?!“','„Das war ein No-Reg!“',
     'Random wird kritisiert','Chat diskutiert Aim Assist','Teammate ist weg',
-    '„Wir brauchen Rotation!“','Rotation kommt zu spät','Chat fragt nach Settings',
+    '„Wir brauchen Rotation!“','Rotation kommt zu spät',
     'Teammate rettet die Runde','„Ich hab keine Heals!“','„Wo ist mein Team?!“',
     '„Chat, hört mal zu!“','„Das ist doch ein Bug!“','„Was ein Matchmaking“',
     '„Das war so nicht geplant“','Der Push geht spektakulär schief',
     'Legenden-Balance wird zerlegt','„Ich bin doch hinter Cover!“',
-    'Das Wort „Hater“ fällt','Jemand erwähnt den Ban-Counter',
+    'Das Wort „Hater“ fällt',
     'Meta-Talk dauert länger als die Runde','„Noch ein Win, dann Schluss“',
     '„Der hat keinen Sound gemacht“','Hotdrop endet nach 40 Sekunden',
     '„Ich schwöre, Leute!“','Ein guter Mate wird gelobt',
     'Die nächste Runde wird zum „Reset“','Es wird nach einem Clip gefragt',
-    '„Das ist jetzt aber unlucky“','„Der steht einfach da!“',
+    '„Der steht einfach da!“',
     'Chat triggert eine Grundsatzdebatte','Eine Challenge wird diskutiert',
-    'Chat und Streamer sind uneins','„Die sind alle auf mir!“',
-    'Nächster Fight statt Rückzug','„Das ist keine Ausrede!“',
+    '„Die sind alle auf mir!“',
+    'Nächster Fight statt Rückzug',
     'Eine Legende ist „unspielbar“','Der Streamtitel wird zum Meme'
   ];
   const DEFAULT_POOL = DEFAULT_BOARD.filter(x => x!==FREE).concat(EXTRAS);
@@ -81,17 +81,33 @@ dialog{max-width:min(620px,95vw);width:100%;background:#191323;color:white;borde
   let pool = DEFAULT_POOL.slice();
   let board = DEFAULT_BOARD.slice();
   let marked = new Set([12]);
-  function persist(){try{localStorage.setItem(KEY,JSON.stringify({v:2,pool,board,marked:[...marked]}))}catch(e){}}
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify({v:3,pool,board,marked:[...marked]}))}catch(e){}}
+  // Beim Laden vorhandener V2-Karten werden die ersetzten Begriffe ebenfalls aktualisiert.
+  const REPLACEMENTS = {
+    '„Wir spielen safe!“': 'Schon wieder bin ich sofort Down',
+    'Der Ban-Counter wird erwähnt': 'Keine Kommunikation',
+    'Jemand erwähnt den Ban-Counter': 'Keine Kommunikation',
+    'Chat schreibt „Skill Issue“': 'Chat zu Ruhig',
+    'Chat und Streamer sind uneins': '„Asia Mann“',
+    'Chat fragt nach Settings': 'Aggresives Angriffsportal',
+    '„Das ist keine Ausrede!“': 'Controller Hass',
+    '„Das ist jetzt aber unlucky“': 'Dieses Drecksgame'
+  };
+  const updateLabel = label => REPLACEMENTS[label] || label;
   function restore(){try{
     const item=JSON.parse(localStorage.getItem(KEY));
     if(!item || !Array.isArray(item.pool) || !Array.isArray(item.board) || item.pool.length<24 || item.board.length!==25) return;
     pool=item.pool.map(String);board=item.board.map(String);board[12]=FREE;
     marked=new Set((Array.isArray(item.marked)?item.marked:[]).filter(n=>Number.isInteger(n)&&n>=0&&n<25));marked.add(12);
-    // Bestehende lokal gespeicherte Karten erhalten ihre Markierungen.
-    // Beim Versionswechsel ergänzen wir die sechs Zitate einmalig.
-    if(item.v!==2){
-      pool=[...new Set([...pool,...SIGNATURE_QUOTES])];
+    if(item.v!==3){
+      pool=[...new Set(pool.map(updateLabel))];
+      board=board.map(updateLabel);
+      if(item.v!==2){
+        pool=[...new Set([...pool,...SIGNATURE_QUOTES])];
+      }
+      // Noch nicht gespielte Karten starten mit dem aktuellen Standardlayout.
       if(marked.size===1) board=DEFAULT_BOARD.slice();
+      if(pool.length<24) pool=[...new Set([...pool,...DEFAULT_POOL])];
       persist();
     }
   }catch(e){}}
